@@ -2,7 +2,18 @@ document.addEventListener('DOMContentLoaded', function(){
     const button = document.querySelectorAll('[data-tab-button]');
     const tabsContainer = document.querySelectorAll('[data-tab-id]');
     const questions = document.querySelectorAll('[data-faq-question]');
-    
+    const heroSection = document.querySelector('.hero');
+    const alturaHero = heroSection.clientHeight;
+
+    window.addEventListener('scroll', function() {
+        const posicaoAtual = window.scrollY;
+
+        if (posicaoAtual < alturaHero) {
+            ocultarElementosDoHeader();
+        } else {
+            exibirElementosDoHeader();
+        }
+    })
     
     for (let i = 0; i < button.length; i++){
         button[i].addEventListener('click', function(botao){
@@ -42,4 +53,13 @@ function esconderTodasAsAbas(){
     for (let i=0; i< tabsContainer.length; i++){
         tabsContainer[i].classList.remove('shows__list--is-active');
     }
+}
+function ocultarElementosDoHeader() {
+    const header = document.querySelector('header');
+    header.classList.add('header--is-hidden');
+}
+
+function exibirElementosDoHeader() {
+    const header = document.querySelector('header');
+    header.classList.remove('header--is-hidden');
 }
